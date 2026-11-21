@@ -1,0 +1,72 @@
+name: Repro
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repro:
+    # The GitHub-hosted image with Xcode 27.x and the iOS 27 simulator runtime.
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1
+        with:
+          xcode-version: '27.2'
+
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          global-json-file: global.json
+
+      # Pinned workload set 11.0.100.1 gives Microsoft.iOS 27.2.11039, the version in the issue.
+      - name: Install the iOS workload
+        run: |
+          dotnet workload install ios --version 11.0.100.1
+          dotnet --info
+
+      - name: Build
+        run: dotnet build -c Release -bl:msbuild.binlog
+
+      # Newest iOS runtime on the image; its first iPhone type, because the type names change with each runtime.
+      - name: Create and boot a simulator
+        run: |
+          runtime=$(xcrun simctl list -j runtimes | jq -r '[.runtimes[] | select(.platform == "iOS" and .isAvailable)] | sort_by(.version | split(".") | map(tonumber)) | last | .identifier')
+          device_type=$(xcrun simctl list -j runtimes | jq -r --arg id "$runtime" '[.runtimes[] | select(.identifier == $id)][0].supportedDeviceTypes | map(select(.productFamily == "iPhone")) | first | .identifier')
+          echo "Runtime: $runtime, device type: $device_type" | tee -a "$GITHUB_STEP_SUMMARY"
+          udid=$(xcrun simctl create BaseWrapperRepro "$device_type" "$runtime")
+          echo "UDID=$udid" >> "$GITHUB_ENV"
+          xcrun simctl boot "$udid"
+          xcrun simctl bootstatus "$udid" -b
+
+      # macOS has no timeout command; perl's alarm survives exec.
+      - name: Run the app
+        run: |
+          xcrun simctl install "$UDID" bin/Release/net11.0-ios/iossimulator-arm64/BaseWrapperFinalizerRepro.app
+          perl -e 'alarm shift; exec @ARGV' 120 \
+            xcrun simctl launch --console-pty --terminate-running-process "$UDID" com.example.basewrapperrepro 2>&1 | tee console.txt || true
+
+      # The job passes when the repro ran, whatever the thread results; they are the finding.
+      - name: Check that all three cases ran
+        run: |
+          grep -E 'CASE [ABC] ' console.txt | sed -E 's/^[^ ]+ [^ ]+ [^ ]+ //' | tee -a "$GITHUB_STEP_SUMMARY"
+          for case in A B C; do
+            grep -q "CASE $case " console.txt || { echo "::error::CASE $case is missing from console.txt"; exit 1; }
+          done
+
+      - name: Shut down the simulator
+        if: always()
+        run: xcrun simctl delete "$UDID" || true
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: repro-logs
+          path: |
+            msbuild.binlog
+            console.txt
