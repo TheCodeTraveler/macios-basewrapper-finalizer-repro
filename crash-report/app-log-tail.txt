@@ -1,0 +1,65 @@
+[20:04:46.4836450] 2026-11-20 20:04:46.450698+0000 CommunityToolkit.Maui.DeviceTests[22147:67299] 	[PASS] EntryTextIsSelectedWhenEditingDidBeginAfterTheBehaviorAttachedAgain
+[20:04:46.8861740] 2026-11-20 20:04:46.870143+0000 CommunityToolkit.Maui.DeviceTests[22147:67642] Marshaling Objective-C exception
+[20:04:46.8862640] 2026-11-20 20:04:46.871203+0000 CommunityToolkit.Maui.DeviceTests[22147:67642]     Exception: *** -[__NSArrayM objectAtIndex:]: index 6 beyond bounds [0 .. 5]
+[20:04:46.8862750] 2026-11-20 20:04:46.873016+0000 CommunityToolkit.Maui.DeviceTests[22147:67642]     Mode: ThrowManagedException
+[20:04:47.0098080] Unhandled exception. ObjCRuntime.ObjCException: Objective-C exception thrown.  Name: NSRangeException Reason: *** -[__NSArrayM objectAtIndex:]: index 6 beyond bounds [0 .. 5]
+[20:04:47.3150680] Native stack trace:
+[20:04:47.3152730] 	0   CoreFoundation                      0x00000001c02896e8 __exceptionPreprocess + 172
+[20:04:47.3152990] 	1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72
+[20:04:47.3153210] 	2   CoreFoundation                      0x00000001c015c5ec -[__NSArrayM getObjects:range:] + 0
+[20:04:47.3153340] 	3   CoreFoundation                      0x00000001c0297a14 -[NSMutableArray removeObject:] + 88
+[20:04:47.3153440] 	4   UIKitCore                           0x00000001c464d1a0 -[_UIKeyboardTextSelectionInteraction detach] + 40
+[20:04:47.3153620] 	5   UIKitCore                           0x00000001c464d1d4 -[_UIKeyboardTextSelectionInteraction dealloc] + 24
+[20:04:47.3153790] 	6   UIKitCore                           0x00000001c4653da4 -[_UIKeyboardBasedTextSelectionInteraction dealloc] + 68
+[20:04:47.3153960] 	7   libxamarin-dotnet-coreclr.dylib     0x00000001051bc1b4 xamarin_dyn_objc_msgSend + 160
+[20:04:47.3155280] 	8   libcoreclr.dylib                    0x0000000105e872a4 CallJittedMethodRetVoid + 36
+[20:04:47.3155570] 	9   libcoreclr.dylib                    0x0000000105dec84c _Z20InvokeUnmanagedCallimP14CallStubHeaderPaS1_ + 132
+[20:04:47.3155670] 	10  libcoreclr.dylib                    0x0000000105dec6b8 _Z34InvokeUnmanagedCalliWithTransitionmP14CallStubHeaderPaP24InterpMethodContextFrameS1_S1_ + 260
+[20:04:47.3155780] 	11  libcoreclr.dylib                    0x0000000105df08bc _Z16InterpExecMethodP16InterpreterFrameP24InterpMethodContextFrameP19InterpThreadContextP19ExceptionClauseArgs + 13808
+[20:04:47.3155930] 	12  libcoreclr.dylib                    0x0000000105d5a7dc ExecuteInterpretedMethod + 480
+[20:04:47.3156030] 	13  libcoreclr.dylib                    0x0000000105e85dcc InterpreterStubRetVoid + 20
+[20:04:47.3156140] 	14  CommunityToolkit.Maui.DeviceTests.r 0x00000001286d5f70 Microsoft_iOS_CoreFoundation_NativeObject__Dispose + 80
+[20:04:47.3156230] 	15  CommunityToolkit.Maui.DeviceTests.r 0x0000000128d81df0 Microsoft_iOS_ObjCRuntime_DisposableObject__Finalize + 32
+[20:04:47.3156440] 	16  CommunityToolkit.Maui.DeviceTests.r 0x0000000129514b70 S_P_CoreLib_System_GC__RunFinalizers + 112
+[20:04:47.3156630] 	17  libcoreclr.dylib                    0x0000000105dd8c4c _ZN26UnmanagedCallersOnlyCaller16InvokeDirect_RetIjJEEET_DpT0_ + 112
+[20:04:47.3156740] 	18  libcoreclr.dylib                    0x0000000105dd8b60 _ZN15FinalizerThread18FinalizeAllObjectsEv + 112
+[20:04:47.3156870] 	19  libcoreclr.dylib                    0x0000000105dd9310 _ZN15FinalizerThread30FinalizerThreadWorkerIterationEPv + 1096
+[20:04:47.7852740] 	20  libcoreclr.dylib                    0x0000000105dd8e8c _ZN15FinalizerThread21FinalizerThreadWorkerEPv + 28
+[20:04:47.7853190] 	21  libcoreclr.dylib                    0x0000000105d77008 _ZN17ManagedThreadBase7KickOffEPFvPvES0_ + 208
+[20:04:47.7853240] 	22  libcoreclr.dylib                    0x0000000105dd941c _ZN15FinalizerThread20FinalizerThreadStartEPv + 92
+[20:04:47.7853270] 	23  libcoreclr.dylib                    0x0000000105eb60cc _ZN7CorUnix10CPalThread11ThreadEntryEPv + 296
+[20:04:47.7867590] 	24  libsystem_pthread.dylib             0x0000000106306680 _pthread_start + 104
+[20:04:47.7867760] 	25  libsystem_pthread.dylib             0x0000000106301a88 thread_start + 8
+[20:04:47.7867860] 
+[20:04:47.7868710]    at ObjCRuntime.Messaging.void_objc_msgSend(IntPtr receiver, IntPtr selector)
+[20:04:47.7868830]    at CoreFoundation.NativeObject.Dispose(Boolean disposing)
+[20:04:47.7868920]    at ObjCRuntime.DisposableObject.Finalize()
+[20:04:47.7869030]    at System.GC.RunFinalizers()
+[20:04:47.7869120] Native stack trace:
+[20:04:47.7869200] 	0   CoreFoundation                      0x00000001c02896e8 __exceptionPreprocess + 172
+[20:04:47.7869280] 	1   libobjc.A.dylib                     0x00000001c008194c objc_exception_throw + 72
+[20:04:47.7869550] 	2   CoreFoundation                      0x00000001c015c5ec -[__NSArrayM getObjects:range:] + 0
+[20:04:47.7869690] 	3   CoreFoundation                      0x00000001c0297a14 -[NSMutableArray removeObject:] + 88
+[20:04:47.7869790] 	4   UIKitCore                           0x00000001c464d1a0 -[_UIKeyboardTextSelectionInteraction detach] + 40
+[20:04:47.7869870] 	5   UIKitCore                           0x00000001c464d1d4 -[_UIKeyboardTextSelectionInteraction dealloc] + 24
+[20:04:47.7869950] 	6   UIKitCore                           0x00000001c4653da4 -[_UIKeyboardBasedTextSelectionInteraction dealloc] + 68
+[20:04:47.7870040] 	7   libxamarin-dotnet-coreclr.dylib     0x00000001051bc1b4 xamarin_dyn_objc_msgSend + 160
+[20:04:47.7870120] 	8   libcoreclr.dylib                    0x0000000105e872a4 CallJittedMethodRetVoid + 36
+[20:04:47.7870200] 	9   libcoreclr.dylib                    0x0000000105dec84c _Z20InvokeUnmanagedCallimP14CallStubHeaderPaS1_ + 132
+[20:04:47.7870280] 	10  libcoreclr.dylib                    0x0000000105dec6b8 _Z34InvokeUnmanagedCalliWithTransitionmP14CallStubHeaderPaP24InterpMethodContextFrameS1_S1_ + 260
+[20:04:47.7870590] 	11  libcoreclr.dylib                    0x0000000105df08bc _Z16InterpExecMethodP16InterpreterFrameP24InterpMethodContextFrameP19InterpThreadContextP19ExceptionClauseArgs + 13808
+[20:04:47.7870730] 	12  libcoreclr.dylib                    0x0000000105d5a7dc ExecuteInterpretedMethod + 480
+[20:04:47.7870810] 	13  libcoreclr.dylib                    0x0000000105e85dcc InterpreterStubRetVoid + 20
+[20:04:47.7870900] 	14  CommunityToolkit.Maui.DeviceTests.r 0x00000001286d5f70 Microsoft_iOS_CoreFoundation_NativeObject__Dispose + 80
+[20:04:47.7870980] 	15  CommunityToolkit.Maui.DeviceTests.r 0x0000000128d81df0 Microsoft_iOS_ObjCRuntime_DisposableObject__Finalize + 32
+[20:04:47.7871060] 	16  CommunityToolkit.Maui.DeviceTests.r 0x0000000129514b70 S_P_CoreLib_System_GC__RunFinalizers + 112
+[20:04:47.7871140] 	17  libcoreclr.dylib                    0x0000000105dd8c4c _ZN26UnmanagedCallersOnlyCaller16InvokeDirect_RetIjJEEET_DpT0_ + 112
+[20:04:47.7871230] 	18  libcoreclr.dylib                    0x0000000105dd8b60 _ZN15FinalizerThread18FinalizeAllObjectsEv + 112
+[20:04:47.7871310] 	19  libcoreclr.dylib                    0x0000000105dd9310 _ZN15FinalizerThread30FinalizerThreadWorkerIterationEPv + 1096
+[20:04:47.7871450] 	20  libcoreclr.dylib                    0x0000000105dd8e8c _ZN15FinalizerThread21FinalizerThreadWorkerEPv + 28
+[20:04:47.7871550] 	21  libcoreclr.dylib                    0x0000000105d77008 _ZN17ManagedThreadBase7KickOffEPFvPvES0_ + 208
+[20:04:47.7871650] 	22  libcoreclr.dylib                    0x0000000105dd941c _ZN15FinalizerThread20FinalizerThreadStartEPv + 92
+[20:04:47.7871730] 	23  libcoreclr.dylib                    0x0000000105eb60cc _ZN7CorUnix10CPalThread11ThreadEntryEPv + 296
+[20:04:47.7871820] 	24  libsystem_pthread.dylib             0x0000000106306680 _pthread_start + 104
+[20:04:47.7871900] 	25  libsystem_pthread.dylib             0x0000000106301a88 thread_start + 8
+[20:04:47.7871990] 
