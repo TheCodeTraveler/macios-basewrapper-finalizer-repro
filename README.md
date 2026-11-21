@@ -38,6 +38,10 @@ CASE B Runtime.GetINativeObject<IUIInteraction> (protocol wrapper): managed type
 CASE C Runtime.GetNSObject (NSObject peer, control): managed type = Foundation.NSObject; dealloc ran = True; dealloc on main thread = True; managed thread id = 1
 ```
 
+## CI logs
+
+[`logs/`](logs) holds `msbuild.binlog` and `console.txt` from [run 44853538436](https://github.com/TheCodeTraveler/macios-basewrapper-finalizer-repro/actions/runs/44853538436) (iOS 27.2 (24B8117) simulator, Microsoft.iOS 27.2.11039, Release). Cases A and B deallocate on the finalizer thread there too.
+
 ## Crash report
 
 [`crash-report/`](crash-report) holds two files, copied without edits, from a CommunityToolkit/Maui device-test run on a GitHub-hosted runner ([run 44805229808](https://github.com/CommunityToolkit/Maui/actions/runs/44805229808/job/136527353055), attempt 1, artifact `device-tests-ios`). Thread 67642 is the CoreCLR finalizer thread in both.
