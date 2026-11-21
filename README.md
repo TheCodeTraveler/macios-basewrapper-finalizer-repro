@@ -51,6 +51,6 @@ CASE C Runtime.GetNSObject (NSObject peer, control): managed type = Foundation.N
 
 The `.ips` lacks the UIKit frames because the Objective-C exception was converted to a managed one (`Mode: ThrowManagedException`), which unwound them.
 
-Issue: dotnet/macios#TBD
+Issue: [dotnet/macios#27420](https://github.com/dotnet/macios/issues/27420)
 
 Drafted by Brandon's Claude (AI) on Brandon's behalf.
